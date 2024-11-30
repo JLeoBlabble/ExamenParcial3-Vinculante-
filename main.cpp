@@ -4,6 +4,7 @@
 int main() {
     Proyecto proyecto;
 
+    // Creación de las tareas con sus ID, descripciones y duraciones
     Tarea* A = new Tarea("A", "Reserva de vuelo", 20);
     Tarea* B = new Tarea("B", "Informar a casa para empacar", 5);
     Tarea* C = new Tarea("C", "Empacar maletas", 40);
@@ -18,7 +19,7 @@ int main() {
     Tarea* L = new Tarea("L", "Organizar documentos", 5);
     Tarea* M = new Tarea("M", "Viajar al aeropuerto y facturar", 25);
 
-    // Agregar dependencias
+    // Agregar dependencias entre las tareas
     E->agregarDependencia(D);
     F->agregarDependencia(E);
     G->agregarDependencia(B);
@@ -26,7 +27,7 @@ int main() {
     K->agregarDependencia(I);
     M->agregarDependencia(K);
 
-    // Agregar tareas al proyecto
+    // Agregar las tareas al proyecto
     proyecto.agregarTarea(A);
     proyecto.agregarTarea(B);
     proyecto.agregarTarea(C);
@@ -41,12 +42,19 @@ int main() {
     proyecto.agregarTarea(L);
     proyecto.agregarTarea(M);
 
+    /* Creamos un vector para almacenar el orden de ejecución de las tareas,
+     * seguido de otro para almacenar las asignaciones de tareas a cada persona, y un int para el número de personas.
+     * Luego, calculamos el orden de ejecución de las tareas, comprobando si supero los 100 minutos,
+     * y asignamos tareas a las personas.
+     * Por último, imprimimos las tareas asignadas a cada persona y si es posible completarlas en 100 minutos o menos.
+     */
     vector<Tarea*> orden;
     if (proyecto.calcularOrdenEjecucion(orden)) {
         vector<vector<Tarea*>> asignaciones;
-        int numPersonas = 3; // Project Manager 1, Project Manager 2, and the Executive
+        int numPersonas = 3;
 
         if (proyecto.asignarTareas(orden, asignaciones, numPersonas)) {
+            // Imprimir las tareas asignadas a cada persona
             for (int i = 0; i < numPersonas; ++i) {
                 cout << "Persona " << i + 1 << ":\n";
                 for (Tarea* tarea : asignaciones[i]) {

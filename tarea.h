@@ -4,6 +4,10 @@
 #include <vector>
 using namespace std;
 
+/* Primero creamos una clase que representa una tarea con su ID, descripción, duración y dependencias.
+ * Seguimos con un constructor que inicializa la tarea con sus atributos, y
+ * por último un metodo para agregar dependencias.
+ */
 class Tarea {
 public:
     string id;
